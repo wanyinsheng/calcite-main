@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "defaultSchema": "KAFKA",
+  "schemas": [
+    {
+      "name": "KAFKA",
+      "tables": [
+        {
+          "name": "MOCKTABLE",
+          "type": "custom",
+          "factory": "org.apache.calcite.adapter.kafka.KafkaTableFactory",
+          "operand": {
+            "consumer.cust": "org.apache.calcite.adapter.kafka.KafkaMockConsumer"
+          }
+        }, {
+          "name": "MOCKTABLE_CUST_ROW_CONVERTER",
+          "type": "custom",
+          "factory": "org.apache.calcite.adapter.kafka.KafkaTableFactory",
+          "operand": {
+            "consumer.cust": "org.apache.calcite.adapter.kafka.KafkaMockConsumer",
+            "row.converter": "org.apache.calcite.adapter.kafka.KafkaRowConverterTest",
+            "consumer.params": {
+              "key.deserializer": "org.apache.kafka.common.serialization.StringDeserializer",
+              "value.deserializer": "org.apache.kafka.common.serialization.StringDeserializer"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
